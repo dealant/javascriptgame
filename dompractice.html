@@ -1,0 +1,52 @@
+<body>
+    <h1>
+      THE TITLE OF YOUR WEBPAGE
+    </h1>
+    <div id="container"></div>
+   
+   <script>
+        const container = document.querySelector('#container');
+    
+        const content = document.createElement('div');
+        content.classList.add('content');
+        content.textContent = 'This is the glorious text-content!';
+    
+        container.appendChild(content);
+
+        const red_text = document.createElement('p');
+        red_text.classList.add('red_text');
+        red_text.textContent = 'Hi, I\'m red text';
+        red_text.style.color = 'red'
+    
+        container.appendChild(red_text);
+
+        const blue_h3 = document.createElement('h3');
+        blue_h3.classList.add('blue_h3');
+        blue_h3.textContent = 'I\'m blue h3';
+        blue_h3.style.color = 'blue'
+    
+        container.appendChild(blue_h3);
+
+        const content1 = document.createElement('div');
+        content1.classList.add('content1');
+        content1.style.border = "2px solid black";
+        content1.style.backgroundColor = "pink";
+
+
+        const h1_content = document.createElement('h1')
+        h1_content.classList.add('h1_content')
+        h1_content.textContent = 'I\'m in a div';
+
+        const p_content = document.createElement('p');
+        p_content.classList.add('p_content');
+        p_content.textContent = 'ME TOO!';
+
+        content1.appendChild(h1_content);
+        content1.appendChild(p_content);
+        container.appendChild(content1);
+
+
+      </script>
+
+</body>
+
