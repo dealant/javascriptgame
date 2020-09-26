@@ -2,7 +2,12 @@
     <h1>
       THE TITLE OF YOUR WEBPAGE
     </h1>
-    <div id="container"></div>
+    <div id="container">
+      <button id="btn0">Click Me1</button>
+      <button id="btn1">Click Me2</button>
+      <button id="btn2">Click Me3</button>
+
+    </div>
    
    <script>
         const container = document.querySelector('#container');
@@ -44,6 +49,14 @@
         content1.appendChild(h1_content);
         content1.appendChild(p_content);
         container.appendChild(content1);
+
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach((button)=>{
+        button.addEventListener('click', ()=>{
+          alert(button.id);
+        })
+      })
+
 
 
       </script>
