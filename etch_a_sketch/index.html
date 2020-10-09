@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    body{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    #grid{
+        display: grid;
+        grid-template-columns: repeat(16, 16px [col-start]);
+
+    }
+
+    .hover{
+        background-color: aqua;
+    }
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch-a-Sketch</title>
+</head>
+<body>
+    <h1>Dealant's Etch-a-Sketch</h1>
+    <div id="grid"></div>
+    <script>
+        const grid = document.querySelector("#grid");
+        for(var i=0; i<16; i++){
+            for(var j=0; j<16; j++){
+                var current_cell = document.createElement("div");
+                current_cell.id = "cell "+ i+"x"+j;
+                current_cell.className = "cell"
+                current_cell.style.borderColor = "black";
+                current_cell.style.borderWidth = "1px";
+                current_cell.style.borderStyle = "solid";
+                current_cell.style.height = "16px";
+                current_cell.style.width = "16px";
+                grid.appendChild(current_cell);
+            }
+        }
+        function hovered(e){
+            const hovered_cell = document.getElementById(e.target.id);
+            console.log(hovered_cell)
+            hovered_cell.classList.remove("cell");
+            hovered_cell.classList.add("hover");
+        }
+
+        const allCells = Array.from(document.querySelectorAll(".cell"));
+        allCells.forEach(cells => cells.addEventListener("mouseover", hovered))
+
+
+        
+    </script>
+</body>
+</html>
