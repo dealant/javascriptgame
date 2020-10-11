@@ -2,14 +2,12 @@
 <html lang="en">
 <style>
     body{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
+
     }
     #grid{
         display: grid;
-        grid-template-columns: repeat(16, 16px [col-start]);
+        width: 960px;
+        grid-template-columns: repeat(auto-fill, minmax(1px, 60px));
 
     }
 
@@ -25,32 +23,57 @@
 </head>
 <body>
     <h1>Dealant's Etch-a-Sketch</h1>
+    <button id="clear">Clear</button>
     <div id="grid"></div>
     <script>
-        const grid = document.querySelector("#grid");
-        for(var i=0; i<16; i++){
-            for(var j=0; j<16; j++){
-                var current_cell = document.createElement("div");
-                current_cell.id = "cell "+ i+"x"+j;
-                current_cell.className = "cell"
-                current_cell.style.borderColor = "black";
-                current_cell.style.borderWidth = "1px";
-                current_cell.style.borderStyle = "solid";
-                current_cell.style.height = "16px";
-                current_cell.style.width = "16px";
-                grid.appendChild(current_cell);
+        function createGrid(size_input){
+            const cell_size = 960/size_input;
+            const grid = document.querySelector("#grid");
+            deleteAllChildren(grid);
+            for(var i=0; i<size_input; i++){
+                for(var j=0; j<size_input; j++){
+                    var current_cell = document.createElement("div");
+                    current_cell.id = "cell "+ i+"x"+j;
+                    current_cell.className = "cell"
+                    current_cell.style.borderColor = "black";
+                    current_cell.style.borderWidth = "1px";
+                    current_cell.style.borderStyle = "solid";
+                    current_cell.style.height = cell_size+"px";
+                    current_cell.style.width = cell_size+"px";
+                    grid.appendChild(current_cell);
+                }
+            }
+            const allCells = Array.from(document.querySelectorAll(".cell"));
+            allCells.forEach(cells => cells.addEventListener("mouseover", hovered))
+            grid.style.gridTemplateColumns = "repeat(auto-fill, minmax(9.6px, 60px))";
+        }
+        createGrid
+
+        function deleteAllChildren(parent){
+            while (parent.firstChild) {
+                parent.removeChild(parent.firstChild);
             }
         }
+
         function hovered(e){
             const hovered_cell = document.getElementById(e.target.id);
-            console.log(hovered_cell)
-            hovered_cell.classList.remove("cell");
             hovered_cell.classList.add("hover");
         }
 
-        const allCells = Array.from(document.querySelectorAll(".cell"));
-        allCells.forEach(cells => cells.addEventListener("mouseover", hovered))
+        function newSize(){
+            var size_input = prompt("How big do you want the next Etch-a-sketch to be", "Size");
+            size_input = parseInt(size_input);
+            if(size_input === parseInt(size_input, 10)){
+                createGrid(size_input)
+            } else {
+                alert("That was invalid please try again")
+                newSize();
+            }
+        }
+        
 
+        const clear_btn = document.querySelector("#clear");
+        clear_btn.addEventListener("click", newSize)
 
         
     </script>
